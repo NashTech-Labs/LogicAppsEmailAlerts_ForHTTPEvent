@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+  "contentVersion": "1.0.0.0",
+  "actions": {
+    "Send_an_email_(V2)": {
+      "type": "ApiConnection",
+      "inputs": {
+        "body": {
+          "Body": "<p>Hello from Azure Logic App!</p>",
+          "Subject": "Logic App HTTP Trigger",
+          "To": "youremail@example.com"
+        },
+        "host": {
+          "connection": {
+            "name": "@parameters('$connections')['office365']['connectionId']"
+          }
+        },
+        "method": "post",
+        "path": "/v2/Mail"
+      },
+      "runAfter": {},
+      "metadata": {}
+    }
+  },
+  "triggers": {
+    "When_an_HTTP_request_is_received": {
+      "type": "Request",
+      "kind": "Http",
+      "inputs": {
+        "schema": {}
+      }
+    }
+  },
+  "outputs": {}
+}
